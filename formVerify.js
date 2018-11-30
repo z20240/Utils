@@ -39,8 +39,11 @@ function _checkType (val, typeString, opt) {
         return isTrueType;
     }
 
-
-    isTrueType = isTrueType && (typeString === "number") ? !isNaN(val) : (typeof val === typeString);
+    if (typeString === "Date") { // Date 參數
+        isTrueType = isTrueType && ( Object.prototype.toString.call(val) === "[object Date]" && !isNaN(val) );
+    } else { // Date 參數
+        isTrueType = isTrueType && ( (typeString === "number") ? !isNaN(val) : (typeof val === typeString) );
+    }
 
     (opt && opt.noEmpty_object && typeString) && (isTrueType = isTrueType && (!_isEmpty(val)));
     (opt && opt.nofalsy) && (isTrueType = isTrueType && (!!val));
