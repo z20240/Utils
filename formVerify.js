@@ -22,8 +22,22 @@ function _checkType (val, typeString, opt) {
     // 如果沒有給 type 則只單純檢查是否有值
     if (!typeString) return (val !== undefined && val !== null);
 
+    // 支援 復合型別
+    if (typeString.split("|").length > 1) {
+        let typeList = typeString.split("|");
+        let canBeTrueType = false;
+
+        for (let k in typeList) {
+            let typeStr = typeList[k];
+
+            canBeTrueType = (canBeTrueType || _checkType(val, typeStr, opt));
+        }
+
+        return canBeTrueType;
+    }
+
     // 支援 array類型 的判斷
-    if (/^\w+\[\]$/.test(typeString)) {
+    if (/^\w*\[\]$/.test(typeString)) {
         typeString = typeString.split("[]")[0];
 
         if ( !Array.isArray(val) ) return false;
@@ -65,6 +79,9 @@ function _getKeyValue(key, args) {
         let steps = key.split(".");
         for (let i = 0 ; i < steps.length ; i++) {
             key = steps[i];
+
+            if (typeof val !== 'object') return {}
+
             val = val[key];
         }
     }
