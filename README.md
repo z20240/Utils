@@ -23,7 +23,7 @@ formVerify 接受兩個參數
 
 ## Checking Object 格式
 
-```
+```json
 {
     "key": "property name",
     "type": "data type", // ex. number, string, number[], string[], [], object, ...etc
@@ -34,7 +34,7 @@ formVerify 接受兩個參數
         errMsg: "return message if this property is invalid".
     },
 }
-
+```
 
 
 ## example
