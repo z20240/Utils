@@ -1,13 +1,34 @@
 /**
-     * 判断一个对象是否为null或者{}
-     * @param obj
-     * @returns {boolean}
-     */
-    export function _isEmpty(obj) {
-        if (obj) return Object.keys(obj).length == 0;
+ * 判断一个对象是否为null或者{}
+ * @param obj
+ * @returns {boolean}
+ */
+export function _isEmpty(obj) {
+   if (obj) return Object.keys(obj).length == 0;
 
-        return obj == null;
-    }
+   return obj == null;
+}
+
+
+/**
+ * 對 array 進行分組, fn 接收一個 element 參數
+ * @param {Array<any>} array
+ * @param {Function} fn
+ */
+export function groupBy( array , fn ) {
+
+    let groups = {};
+
+    array.forEach( function( ele ) {
+        let group = JSON.stringify( fn(ele) );
+        groups[group] = groups[group] || [];
+        groups[group].push( ele );
+    });
+
+    return Object.keys(groups).map( function( group ) {
+        return groups[group];
+    });
+}
 
 /**
  *
