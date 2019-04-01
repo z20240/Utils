@@ -1,4 +1,17 @@
 /**
+ *  pipe doing each functions and return the result.
+ * @param any
+ */
+export const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
+
+/**
+ * compose doing each functions from right to left and return the result.
+ * @param any
+ */
+export const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
+
+
+/**
  * 判断一个对象是否为null或者{}
  * @param obj
  * @returns {boolean}
