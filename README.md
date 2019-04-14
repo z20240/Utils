@@ -1,4 +1,11 @@
-# formVerify
+
+# Utils
+
+這是一個集成一些時常使用的 function 的小工具。
+
+包括，但不限於
+
+## formVerify
 
 這是一個專門檢查 javascript 物件屬性是否合法的小工具。
 
@@ -17,11 +24,11 @@ formVerify 接受兩個參數
 - arg1: rule `(Array)`
 - arg2: value `(Object)`
 
-## Rule arg 規範
+### Rule arg 規範
 
 你可以使用 `string array`, 只單純檢查此屬性是否存在，或是使用 `Checking Object` 做進一步的檢查
 
-## Checking Object 格式
+### Checking Object 格式
 
 ```javascript
 {
@@ -37,7 +44,7 @@ formVerify 接受兩個參數
 ```
 
 
-## example
+### example
 
 ```javascript
 
@@ -59,3 +66,24 @@ console.log( formVerify(rules1, value) ); // return true.
 console.log( formVerify(rules1, value) ); // return true. 
 ```
 
+## isEmpty
+
+判斷一個Obj是否為null或者{}
+
+## groupBy( array, fn )
+
+對 array 進行分組, fn 接收一個 element 參數
+
+## pipe(fn1, fn2, ...)
+
+循序的執行給予的 function 並回傳最終的結果
+
+## compose(fn1, fn2, ...)
+
+倒序的執行給予的 function 並回傳最終的結果
+
+## curry(fn, n) 
+
+對所給予的 function 柯里化。若給予 n 值，則以 n 作為 fn 接收的參數數量。
+        errMsg: "return message if this property is invalid".直
+        errMsg: "return message if this property is invalid".
