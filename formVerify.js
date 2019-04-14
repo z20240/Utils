@@ -148,7 +148,7 @@ function _getKeyValue(key, args) {
  * @param {any} args 要被檢查的參數
  * @returns {boolean|string} 回傳值是 boolean 或 errMsg(若有的話)
  */
-module.exports = (formSchema, args) => {
+export function formVerify (formSchema, args) => {
     for (let i = 0 ; i < formSchema.length ; i++) {
         let checkObj = formSchema[i];
         let key = (typeof checkObj === `string`) ? checkObj : checkObj.key;
