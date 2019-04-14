@@ -34,7 +34,7 @@ export const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
  * @param obj
  * @returns {boolean}
  */
-export function _isEmpty(obj) {
+export function isEmpty(obj) {
    if (obj) return Object.keys(obj).length == 0;
 
    return obj == null;
@@ -111,7 +111,7 @@ function _checkType (val, typeString, opt) {
         isTrueType = isTrueType && ( (typeString === "number") ? !isNaN(val) : (typeof val === typeString) );
     }
 
-    (opt && opt.noEmpty_object && typeString) && (isTrueType = isTrueType && (!_isEmpty(val)));
+    (opt && opt.noEmpty_object && typeString) && (isTrueType = isTrueType && (!isEmpty(val)));
     (opt && opt.nofalsy) && (isTrueType = isTrueType && (!!val));
 
     return isTrueType;
