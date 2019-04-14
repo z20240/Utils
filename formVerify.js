@@ -1,4 +1,22 @@
 /**
+ * currify the gave function
+ * If number n is given, `curry` will currify the function base on the n arguments.
+ * @param {Function} fn
+ * @param {Number} n specify number of arguments given.
+ */
+export const curry = (fn, n) => {
+    const arity = n || fn.length;
+    return function curried(...args) {
+        return args.length >= arity ?
+            fn.call(this, ...args) :
+            (...rest) => {
+                return curried.call(this, ...args, ...rest);
+            };
+    };
+}
+
+
+/**
  *  pipe doing each functions and return the result.
  * @param any
  */
