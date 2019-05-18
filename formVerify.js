@@ -30,7 +30,7 @@ export const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
 
 
 /**
- * 判断一个对象是否为null或者{}
+ * 判断一个object 是否为 null 或者 {}
  * @param obj
  * @returns {boolean}
  */
@@ -39,6 +39,24 @@ export function isEmpty(obj) {
 
    return obj == null;
 }
+
+/**
+ * 亂數對 array 洗亂 array 內容，並回傳一個新的 array
+ * @param {any[]} ary
+ * @returns {any[]}
+ */
+export function shuffle(ary) {
+    let i, j, temp;
+    arr = [...ary];
+    for ( i = arr.length - 1; i > 0; i-- ) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    return arr;
+}
+
 
 
 /**
