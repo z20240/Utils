@@ -15,6 +15,14 @@ export const curry = (fn, n) => {
     };
 }
 
+/**
+ * XOR
+ * @param {boolean} a
+ * @param {boolean} b
+ * @return boolean
+ */
+export const XOR = (a, b) => !!(a ^ b);
+
 
 /**
  *  pipe doing each functions and return the result.
