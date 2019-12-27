@@ -44,9 +44,10 @@ const filter = curry((fn,ary) => ary.filter(fn), 2);
 /**
  * reduce array. (can be used by curry.)
  * @param {Function} fn
+ * @param {any} initial
  * @param {Array<any>} array
  */
-const reduce = curry((fn,ary) => ary.reduce(fn), 2);
+const reduce = curry((fn, initial, ary) => ary.reduce(fn, initial), 3);
 
 /**
  * @description get the value by prop of an object
@@ -54,6 +55,16 @@ const reduce = curry((fn,ary) => ary.reduce(fn), 2);
  * @param {object} obj
  */
 const prop = curry((prop, obj) => obj[prop], 2);
+
+const push = x => ary => [...(ary || []), x];
+
+const pop = ary => ary[ary.length - 1];
+
+const shift = ary => ary[0];
+
+const unshift = x => ary => [x, ...(ary || [])];
+
+const slice = (from, to, ary) => ary.slice(from, to)
 
 
 /**
@@ -98,17 +109,21 @@ const shuffle = ary => {
  */
 const groupBy = curry(( fn, array ) => {
 
-    let groups = {};
+    const genKey = ele => JSON.stringify( fn(ele) );
 
-    array.forEach( function( ele ) {
-        let group = JSON.stringify( fn(ele) );
-        groups[group] = groups[group] || [];
-        groups[group].push( ele );
+    const dispatchByKey = (prev, curr) => ({
+        ...prev,
+        [genKey(curr)]: push(curr)(prop(genKey(curr))(prev) || [])
     });
 
-    return Object.keys(groups).map( function( group ) {
-        return groups[group];
-    })
+    const groupInAnObject = reduce(dispatchByKey, {});
+
+    const dispatchToList = obj => Object.keys(obj).map(key => obj[key]);
+
+    return pipe(
+        groupInAnObject,
+        dispatchToList
+    )(array);
 }, 2);
 
 
@@ -224,6 +239,11 @@ const formVerify = (formSchema, args) => {
 
 
 export default {
+    shift,
+    unshift,
+    slice,
+    pop,
+    push,
     map,
     filter,
     reduce,
