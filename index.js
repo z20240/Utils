@@ -64,7 +64,10 @@ const shift = ary => ary[0];
 
 const unshift = x => ary => [x, ...(ary || [])];
 
-const slice = (from, to, ary) => ary.slice(from, to)
+const slice = (from, to, ary) => ary.slice(from, to);
+
+const repeat = n => f => x => (n > 0) ? repeat(n - 1)(f)(f(x)) : x;
+
 
 
 /**
@@ -93,12 +96,14 @@ const isEmpty = (obj) => {
  * @returns {any[]}
  */
 const shuffle = ary => {
-    let i, j;
+
     const arr = [...ary];
-    for ( i = arr.length - 1; i > 0; i-- ) {
-        j = ~~(Math.random() * (i + 1));
+
+    ary.forEach((x, i) => {
+        const j = ~~(Math.random() * i);
         [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
+    })
+
     return arr;
 }
 
