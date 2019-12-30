@@ -249,6 +249,7 @@ export default {
     shift,
     unshift,
     slice,
+    and,
     pop,
     push,
     map,
