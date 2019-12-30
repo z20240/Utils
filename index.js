@@ -56,6 +56,8 @@ const reduce = curry((fn, initial, ary) => ary.reduce(fn, initial), 3);
  */
 const prop = curry((prop, obj) => obj[prop], 2);
 
+const and = curry((f1, f2) => o => f1(o) && f2(o), 2);
+
 const push = x => ary => [...(ary || []), x];
 
 const pop = ary => ary[ary.length - 1];
