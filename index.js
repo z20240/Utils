@@ -70,6 +70,10 @@ const slice = (from, to, ary) => ary.slice(from, to);
 
 const repeat = n => f => x => (n > 0) ? repeat(n - 1)(f)(f(x)) : x;
 
+/**
+ * @param {number} len
+ */
+const randAlpha = (len) => Math.random().toString(36).slice(2, 2 + len);
 
 
 /**
@@ -299,7 +303,8 @@ export default {
     shuffle,
     groupBy,
     formVerify,
-    debounce
+    debounce,
+    randAlpha
 };
 
 
